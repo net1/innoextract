@@ -218,6 +218,14 @@ if(NOT WIN32)
 	check_symbol_exists(bswap_16 "byteswap.h" INNOEXTRACT_HAVE_BSWAP_16)
 	check_symbol_exists(bswap_32 "byteswap.h" INNOEXTRACT_HAVE_BSWAP_32)
 	check_symbol_exists(bswap_64 "byteswap.h" INNOEXTRACT_HAVE_BSWAP_64)
+	check_symbol_exists(posix_spawnp "spawn.h" INNOEXTRACT_HAVE_POSIX_SPAWNP)
+	if(NOT INNOEXTRACT_HAVE_POSIX_SPAWNP)
+		check_symbol_exists(fork "unistd.h" INNOEXTRACT_HAVE_FORK)
+		check_symbol_exists(execvp "unistd.h" INNOEXTRACT_HAVE_EXECVP)
+	endif()
+	if(INNOEXTRACT_HAVE_POSIX_SPAWNP OR (INNOEXTRACT_HAVE_FORK AND INNOEXTRACT_HAVE_EXECVP))
+		check_symbol_exists(waitpid "sys/wait.h" INNOEXTRACT_HAVE_WAITPID)
+	endif()
 endif()
 
 
@@ -331,6 +339,8 @@ set(INNOEXTRACT_SOURCES
 	src/util/log.cpp
 	src/util/math.hpp
 	src/util/output.hpp
+	src/util/process.hpp
+	src/util/process.cpp
 	src/util/storedenum.hpp
 	src/util/time.hpp
 	src/util/time.cpp
