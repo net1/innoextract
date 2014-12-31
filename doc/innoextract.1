@@ -44,6 +44,7 @@ Here is a short summary of the options available in innoextract. Please refer to
     \-\-language \fILANG\fP      Extract files for the given language
  \-T \-\-timestamps \fITZ\fP      Timezone for file times or "local" or "none"
  \-d \-\-output\-dir \fIDIR\fP     Extract files into the given directory
+ \-g \-\-gog                Extract additional archives from GOG.com installers
 .fi
 .TP
 .B Display options:
@@ -66,6 +67,11 @@ Don't convert Windows paths to UNIX paths and don't substitute variables in path
 .TP
 \fB\-e\fP, \fB\-\-extract\fP
 Extract all files to the current directory. This action is enabled by default, unless either \fB\-\-list\fP or \fB\-\-extract\fP is specified. You may only specify one of \fB\-\-extract\fP and \fB\-\-test\fP.
+.TP
+\fB\-g\fP, \fB\-\-gog\fP
+For some newer multi-part GOG.com installers the \fI.bin\fP files are not part of the Inno Setup installer but instead are encrypted RAR archives. This option tells innoextract to extract these files using the `unrar` or `unar` (http://unarchiver.c3.cx/commandline) utilities.
+
+The \fB\-\-list\fP, \fB\-\-extract\fP and \fB\-\-output\-dir\fP options are passed along to unrar/unar, but other options may be ignored for the RAR files.
 .TP
 \fB\-\-gog\-game\-id\fP
 Determine the ID used by GOG.com for the game contained in this installer. This will only work with Galaxy-ready GOG.com installers.
@@ -160,7 +166,7 @@ Names for data slice/disk files in multi-file installers must follow the standar
 
 Encrypted installers are not supported.
 .SH SEE ALSO
-\fBcabextract\fP(1), \fBunshield\fP(1), \fBtzset\fP(3)
+\fBcabextract\fP(1), \fBunar\fP(1), \fBunrar\fP(1), \fBunshield\fP(1), \fBtzset\fP(3)
 .SH BUGS
 .PP
 No known bugs.

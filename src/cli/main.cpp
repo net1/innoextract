@@ -142,6 +142,7 @@ int main(int argc, char * argv[]) {
 		("language", po::value<std::string>(), "Extract files for the given language")
 		("timestamps,T", po::value<std::string>(), "Timezone for file times or \"local\" or \"none\"")
 		("output-dir,d", po::value<std::string>(), "Extract files into the given directory")
+		("gog,g", "Extract additional archives from GOG.com installers")
 	;
 	
 	po::options_description io("Display options");
@@ -152,7 +153,7 @@ int main(int argc, char * argv[]) {
 		("color,c", po::value<bool>()->implicit_value(true), "Enable/disable color output")
 		("progress,p", po::value<bool>()->implicit_value(true), "Enable/disable the progress bar")
 		#ifdef DEBUG
-			("debug,g", "Output debug information")
+			("debug", "Output debug information")
 		#endif
 	;
 	
@@ -312,6 +313,8 @@ int main(int argc, char * argv[]) {
 			}
 		}
 	}
+	
+	o.gog = (options.count("gog") != 0);
 	
 	const std::vector<std::string> & files = options["setup-files"]
 	                                         .as< std::vector<std::string> >();

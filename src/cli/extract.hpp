@@ -47,6 +47,8 @@ struct extract_options {
 	bool preserve_file_times;
 	bool local_timestamps;
 	
+	bool gog; // Try to extract additional archives used in GOG.com installers
+	
 	std::string language;
 	
 	setup::filename_map filenames;
