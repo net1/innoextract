@@ -212,6 +212,13 @@ void header::load(std::istream & is, const version & version) {
 	} else {
 		uninstallable.clear();
 	}
+	
+	if(version >= INNO_VERSION(5, 5, 6)) {
+			is >> util::encoded_string(setupmutex_filter, version.codepage());
+	} else {
+			setupmutex_filter.clear();
+	} 	
+	
 	if(version >= INNO_VERSION(5, 5, 0)) {
 		is >> util::encoded_string(close_applications_filter, version.codepage());
 	} else {

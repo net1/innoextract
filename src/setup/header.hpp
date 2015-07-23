@@ -96,6 +96,7 @@ struct header {
 		UsePreviousLanguage,
 		DisableWelcomePage,
 		CloseApplications,
+		SetupMutex,		
 		RestartApplications,
 		AllowNetworkDrive,
 		
@@ -153,6 +154,7 @@ struct header {
 	std::string create_uninstall_registry_key;
 	std::string uninstallable;
 	std::string close_applications_filter;
+    std::string setupmutex_filter;	
 	std::string license_text;
 	std::string info_before;
 	std::string info_after;
